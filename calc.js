@@ -31,7 +31,10 @@ function addNumber(evt) {
 function addOperand(evt) {
   var op = evt.target.innerHTML;
   if (op === 'x') op = '*';
-  console.log(op);
+  entries.push(input);
+  entries.push(op);
+  input = "";
+  updateDisplay();  
 }
 
 function equals() {
