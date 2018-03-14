@@ -24,7 +24,8 @@ function addListener (btn, func) {
 }
 
 function addNumber(evt) {  
-  console.log(evt.target.innerHTML);
+  input += evt.target.innerHTML;
+  updateDisplay();  
 }
 
 function addOperand(evt) {
@@ -42,7 +43,7 @@ function calculate () {
 }
 
 function updateDisplay () {
-
+  document.getElementsByClassName('display')[0].innerHTML = input;
 }
 
 function clearAll() {
