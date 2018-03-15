@@ -31,14 +31,17 @@ function addNumber(evt) {
 function addOperand(evt) {
   var op = evt.target.innerHTML;
   if (op === 'x') op = '*';
-  entries.push(Number(input));
-  entries.push(op);
-  input = "";
+  if (op === '-' && input === '') input = '-';
+  else {
+    entries.push(Number(input));
+    entries.push(op);
+    input = "";
+  }
   updateDisplay();  
 }
 
 function equals() {
-  if (input !== '') entries.push(Number(input));
+  entries.push(Number(input));  
   input = calculate();
   entries = [];
   updateDisplay();
