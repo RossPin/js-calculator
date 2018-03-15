@@ -6,7 +6,7 @@ var result;
 
 function init() {  
   addListener('btnAC', clearAll);
-  addListener('btnCE', clearLast);
+  addListener('btnCE', clearEntry);
   for (var i = 0; i <= 9; i++) {
     addListener('btn'+i, addNumber);
   }
@@ -57,9 +57,12 @@ function updateDisplay () {
 }
 
 function clearAll() {
-  console.log('AC');
+  input = '';
+  entries = [];
+  updateDisplay();
 }
 
-function clearLast() {
-  console.log('CE');
+function clearEntry() {
+  input = '';
+  updateDisplay();
 }
