@@ -7,13 +7,20 @@
 }
 .display {
   text-align: right;
-  height: 40px;
-  font-size: 20px;
+  height: 60px;  
   padding: 5px;
   background-color: darkseagreen;
   border: 1px solid black;
   border-radius: 3px;
   margin: 10px;
+}
+
+#equationDisplay {
+  font-size: 12px;
+}
+
+#mainDisplay {
+  font-size: 24px;
 }
 
 .row {

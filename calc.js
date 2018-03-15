@@ -47,7 +47,7 @@ function equals() {
 
 
 function updateDisplay () {
-  document.getElementById('equationDisplay').innerHTML = equation;
+  document.getElementById('equationDisplay').innerHTML = equation.replace(/\*/g, 'x');
     document.getElementById('mainDisplay').innerHTML = input;
 }
 
