@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', init)
 
-var input = "";
+var input = '';
 var entries = [];
 var result;
 
@@ -31,18 +31,21 @@ function addNumber(evt) {
 function addOperand(evt) {
   var op = evt.target.innerHTML;
   if (op === 'x') op = '*';
-  entries.push(input);
+  entries.push(Number(input));
   entries.push(op);
   input = "";
   updateDisplay();  
 }
 
 function equals() {
-  console.log('equals');
+  if (input !== '') entries.push(Number(input));
+  result = calculate();
+  input = result;
+  updateDisplay();
 }
 
 function calculate () {
-
+  return 65.78;
 }
 
 function updateDisplay () {
