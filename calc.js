@@ -39,13 +39,17 @@ function addOperand(evt) {
 
 function equals() {
   if (input !== '') entries.push(Number(input));
-  result = calculate();
-  input = result;
+  input = calculate();
+  entries = [];
   updateDisplay();
 }
 
 function calculate () {
-  return 65.78;
+  var equation = '';
+  for (var i = 0; i < entries.length; i++) {
+    equation += entries[i];
+  }
+  return eval(equation);
 }
 
 function updateDisplay () {
