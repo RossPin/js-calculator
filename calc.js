@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', init)
 
 var input = '';
 var equation = '';
+var displayAnswer = false;
 
 function init() {  
   addListener('btnAC', clearAll);
@@ -22,7 +23,11 @@ function addListener (btn, func) {
   document.getElementById(btn).addEventListener('click', func);
 }
 
-function addNumber(evt) {  
+function addNumber(evt) { 
+  if (displayAnswer) {
+    displayAnswer = false;
+    input = '';
+  } 
   input += evt.target.innerHTML;
   updateDisplay();  
 }
@@ -35,29 +40,34 @@ function addOperand(evt) {
     equation += (Number(input) || 0) + ' ' + op + ' ';
     input = "";
   }
+  displayAnswer = false;
   updateDisplay();  
 }
 
 function equals() {  
   equation += Number(input) || 0
-  input = eval(equation);  
+  input = eval(equation);
+  displayAnswer = true; 
   updateDisplay();
-  equation = '';
+  equation = '';  
 }
 
 
 function updateDisplay () {
   document.getElementById('equationDisplay').innerHTML = equation.replace(/\*/g, 'x');
-    document.getElementById('mainDisplay').innerHTML = input;
+  if (displayAnswer) document.getElementById('mainDisplay').innerHTML = '= ' + input;
+  else document.getElementById('mainDisplay').innerHTML = input;
 }
 
 function clearAll() {
+  displayAnswer = false;
   input = '';
   equation = '';  
   updateDisplay();
 }
 
 function clearEntry() {
+  displayAnswer = false;
   input = '';
   updateDisplay();
 }
