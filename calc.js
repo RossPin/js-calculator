@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', init)
 
 var input = '';
-var entries = [];
-var result;
+var equation = '';
 
 function init() {  
   addListener('btnAC', clearAll);
@@ -32,36 +31,29 @@ function addOperand(evt) {
   var op = evt.target.innerHTML;
   if (op === 'x') op = '*';
   if (op === '-' && input === '') input = '-';
-  else {
-    entries.push(Number(input));
-    entries.push(op);
+  else {  
+    equation += (Number(input) || 0) + ' ' + op + ' ';
     input = "";
   }
   updateDisplay();  
 }
 
-function equals() {
-  entries.push(Number(input));  
-  input = calculate();
-  entries = [];
+function equals() {  
+  equation += Number(input) || 0
+  input = eval(equation);  
   updateDisplay();
+  equation = '';
 }
 
-function calculate () {
-  var equation = '';
-  for (var i = 0; i < entries.length; i++) {
-    equation += entries[i];
-  }
-  return eval(equation);
-}
 
 function updateDisplay () {
-  document.getElementsByClassName('display')[0].innerHTML = input;
+  document.getElementById('equationDisplay').innerHTML = equation;
+    document.getElementById('mainDisplay').innerHTML = input;
 }
 
 function clearAll() {
   input = '';
-  entries = [];
+  equation = '';  
   updateDisplay();
 }
 
