@@ -5,22 +5,22 @@ var equation = '';
 var displayAnswer = false;
 
 function init() {  
-  addListener('btnAC', clearAll);
-  addListener('btnCE', clearEntry);
-  for (var i = 0; i <= 9; i++) {
-    addListener('btn'+i, addNumber);
-  }
-  addListener('btnDec', addNumber);
-  addListener('btnAdd', addOperand);
-  addListener('btnSub', addOperand);
-  addListener('btnMlt', addOperand);
-  addListener('btnDiv', addOperand);
-  addListener('btnEq', equals);
+  addListeners();
   updateDisplay();
 }
 
-function addListener (btn, func) {
-  document.getElementById(btn).addEventListener('click', func);
+function addListeners () {
+  var numBtns = document.getElementsByClassName('btnNum');
+  var opBtns = document.getElementsByClassName('btnOp');
+  document.getElementById('btnAC').addEventListener('click', clearAll);
+  document.getElementById('btnCE').addEventListener('click', clearEntry);
+  document.getElementById('btnEq').addEventListener('click', equals);  
+  for (var i = 0; i < numBtns.length; i++) {
+    numBtns[i].addEventListener('click', addNumber);
+  }    
+  for (var i = 0; i < opBtns.length; i++) {
+    opBtns[i].addEventListener('click', addOperand);
+  }
 }
 
 function addNumber(evt) { 
