@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', init)
 
 var input = '';
-var equation = '';
+var equation = [];
 var displayAnswer = false;
 
 function init() {  
@@ -35,26 +35,27 @@ function addNumber(evt) {
 function addOperand(evt) {
   var op = evt.target.innerHTML;
   if (op === 'x') op = '*';
-  if (op === '-' && input === '') input = '-';
+  if (op === '-' && input === '' && isNaN(equation[equation.length-1])) input = '-';
   else {  
-    equation += (Number(input) || 0) + ' ' + op + ' ';
-    input = "";
+    if (isNaN(equation[equation.length-1])) equation.push(Number(input) || 0);
+    equation.push(op);
+    input = '';
   }
   displayAnswer = false;
   updateDisplay();  
 }
 
 function equals() {  
-  equation += Number(input) || 0
-  input = eval(equation);
+  equation.push(Number(input) || 0);
+  input = eval(equation.join(' '));
   displayAnswer = true; 
   updateDisplay();
-  equation = '';  
+  equation = [];  
 }
 
 
 function updateDisplay () {
-  document.getElementById('equationDisplay').innerHTML = equation.replace(/\*/g, 'x');
+  document.getElementById('equationDisplay').innerHTML = equation.join(' ').replace(/\*/g, 'x');
   if (displayAnswer) document.getElementById('mainDisplay').innerHTML = '= ' + input;
   else document.getElementById('mainDisplay').innerHTML = input;
 }
@@ -62,12 +63,13 @@ function updateDisplay () {
 function clearAll() {
   displayAnswer = false;
   input = '';
-  equation = '';  
+  equation = [];  
   updateDisplay();
 }
 
 function clearEntry() {
   displayAnswer = false;
-  input = '';
+  if (input !== '') input = '';
+  else equation.pop();
   updateDisplay();
 }
